@@ -9,20 +9,14 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             PrintFiboncci();
-            PrintMonths();
-            PrintArray();
-            PrintPolylineArray();
-
-            int[] array = { 1, 2, 3, 4, 5 };
-            int[] array2 = { 7, 8, 9, 10, 11, 12, 13 };
-            var result = CopyArrays(array, array2, 3);
-
-            ResizeArray(ref result);
+            PrintEvenNumbers();
+            PrintMultiplacationTable();
+            GetPassword();
         }
 
         private static void PrintFiboncci()
         {
-            int[] fibonacci = new int[8];
+            int[] fibonacci = new int[10];
 
             fibonacci[0] = 0;
             fibonacci[1] = 1;
@@ -40,85 +34,54 @@ namespace ConsoleApp1
             Console.WriteLine();
         }
 
-        private static void PrintMonths()
+        private static void PrintEvenNumbers()
         {
-            string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
 
-            foreach (var month in months)
+            for (int i = 1; i < 21; i++)
             {
-                Console.Write(month + " ");
+                if (i % 2 == 0)
+                {
+                    Console.Write(i + " ");
+                }
             }
-
             Console.WriteLine();
         }
 
-        private static void PrintArray()
+        private static void PrintMultiplacationTable()
         {
-            int[][] array = { new int[] { 2, 3, 4 }, new int[] { 2, 3, 4 }, new int[] { 2, 3, 4 }, };
-            int[][] result = new int[array.Length][];
-
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 1; i <= 5; i++)
             {
-                result[i] = new int[array[i].Length];
-
-                for (int j = 0; j < array[i].Length; j++)
+                for (int j = 1; j <= 5; j++)
                 {
-                    result[i][j] = (int)(Math.Pow(array[i][j], (i+1)));
-                    Console.Write(result[i][j] + " ");
+                    Console.Write(i*j +" ");
                 }
                 Console.WriteLine();
             }
         }
 
-        private static void PrintPolylineArray()
+        private static void GetPassword()
         {
-            double[][] polylineArray = new double[3][];
-            polylineArray[0] = new double[5];
+            string password = "qwerty";
+            string line;
+            int i = 0;
+            int result;
 
-            for (int i = 0; i < polylineArray[0].Length; i++)
+            do
             {
-                polylineArray[0][i] = i + 1;
-            }
+                Console.Write("Enter password:");
+                line = Console.ReadLine();
 
-            polylineArray[1] = new double[]{Math.E, Math.PI};
+                result = string.Compare(line, password);
 
-            polylineArray[2] = new double[4];
-
-            for (int i = 0, j = 1; i < polylineArray[2].Length; i++, j = j * 10)
-            {
-                polylineArray[2][i] = Math.Log10(j);
-            }
-
-            foreach (double[] array in polylineArray)
-            {
-                foreach (double count in array)
+                if (result != 0)
                 {
-                    Console.Write(count+" ");
+                    Console.WriteLine("Incorrect Password!");
                 }
-                Console.WriteLine();
+
+                i++;
             }
-        }
-
-        private static int[] CopyArrays(int[] array1, int[] array2 , int length)
-        {
-
-            Array.Copy(array1, array2,length);
-
-            foreach (var item in array2)
-            {
-                Console.Write(item+ " ");
-            }
-
-            Console.WriteLine();
-            return array1;
-        }
-
-        private static void ResizeArray(ref int[] array)
-        {
-            Array.Resize(ref array, array.Length * 2);
-
-            Console.WriteLine(array.Length);
-
+            while (result!=0);
+            Console.WriteLine("Correct Password!");
         }
     }
 }
